@@ -1,5 +1,7 @@
 import smtplib
 from collections import defaultdict
+import copy
+import random
 
 def createParticipantList(filename):
 	participant_list = list()
@@ -7,6 +9,31 @@ def createParticipantList(filename):
 	for line in txt_file:
 		participant_list.append(tuple(line[:-1].split(", ")))
 	return participant_list
+
+def pairParticipants(participant_list):
+	giver_list = participant_list
+	receiver_list = copy.deepcopy(giver_list)
+	participant_pairs = defaultdict(lambda:tuple())
+
+	for giver in giver_list:
+		receiver = None
+		while True:
+			index = random.randrange(0, len(receiver_list))
+			if receiver_list[index] != giver:
+				receiver = receiver_list[index]
+				receiver_list.remove(receiver)
+				break
+		if len(receiver_list) == 1 and giver_list[-1] == receiver_list[-1]:
+			last_giver = giver_list[-1]
+			last_receiver = receiver
+			receiver = receiver_list[-1]
+			participant_pairs[giver] = receiver
+			participant_pairs[last_giver] = last_receiver
+			break
+		else:
+			participant_pairs[giver] = receiver
+	print participant_pairs
+	return participant_pairs
 
 def sendMails():
 	from_addr = "vcchao93@gmail.com"
@@ -34,7 +61,8 @@ def sendMails():
 		print "Error: unable to send email"
 
 def main():
-	createParticipantList("participants.dat")
+	participant_list = createParticipantList("participants.dat")
+	participant_pairs = pairParticipants(participant_list)
 
 if __name__ == "__main__": 
     main()
