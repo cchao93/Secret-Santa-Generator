@@ -20,8 +20,7 @@ def pairParticipants(participant_list):
 		while True:
 			index = random.randrange(0, len(receiver_list))
 			if receiver_list[index] != giver:
-				receiver = receiver_list[index]
-				receiver_list.remove(receiver)
+				receiver = receiver_list.pop(index)
 				break
 		if len(receiver_list) == 1 and giver_list[-1] == receiver_list[-1]:
 			last_giver = giver_list[-1]
