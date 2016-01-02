@@ -1,7 +1,7 @@
-import smtplib
-from collections import defaultdict
 import copy
+from collections import defaultdict
 import random
+import smtplib
 import sys
 
 def promptForOrganizerInfo():
@@ -26,7 +26,6 @@ def pairParticipants(participant_list):
 	giver_list = participant_list
 	receiver_list = copy.deepcopy(giver_list)
 	participant_pairs = defaultdict(lambda:tuple())
-
 	for giver in giver_list:
 		receiver = None
 		while True:
@@ -51,7 +50,7 @@ def sendMailsToParticipants(organizer, price_limit, participant_pairs):
 	password = "[PASSWORD]"
 	try:
 		server = smtplib.SMTP("smtp.gmail.com:587")
-		#server.ehlo()
+		server.ehlo()
 		server.starttls()
 		server.login(username, password)
 		print "Successfully connected to SMTP server"
@@ -72,7 +71,6 @@ maximum expenditure limit on a present is $%s. Please contact \
 	""" % (giver[0], organizer[0], receiver[0], price_limit, organizer[0])
 	message = """From: %s <%s>\nTo: %s <%s>\nSubject: %s\n\n%s
 	""" % (organizer[0], organizer[1], giver[0], giver[1], subject, body)
-
 	try:
 		server.sendmail(from_addr, to_addrs, message)
 		print "Successfully sent email"
