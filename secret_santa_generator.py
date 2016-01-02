@@ -2,6 +2,7 @@ import smtplib
 from collections import defaultdict
 import copy
 import random
+import sys
 
 def promptForOrganizerInfo():
 	name = raw_input("Thank you for using the Secret Santa Generator.\nWhat is your name?\n")
@@ -17,6 +18,9 @@ def createParticipantList(filename):
 	for line in txt_file:
 		participant_list.append(tuple(line[:-1].split(", ")))
 	return participant_list
+
+def listHasDuplicates(li):
+	return len(li) != len(set(li))
 
 def pairParticipants(participant_list):
 	giver_list = participant_list
@@ -78,6 +82,9 @@ maximum expenditure limit on a present is $%s. Please contact \
 def main():
 	organizer, price_limit, filename = promptForOrganizerInfo()
 	participant_list = createParticipantList(filename)
+	if listHasDuplicates(participant_list):
+		print "The list of participants has duplicates.\n"
+		sys.exit()
 	participant_pairs = pairParticipants(participant_list)
 	sendMailsToParticipants(organizer, price_limit, participant_pairs)
 
