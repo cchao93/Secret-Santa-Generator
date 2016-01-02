@@ -47,8 +47,8 @@ def pairParticipants(participant_list):
 	return participant_pairs
 
 def sendMailsToParticipants(organizer, price_limit, participant_pairs):
-	username = "vcchao93"
-	password = "victor15334c"
+	username = "SecretSantaGenerator01"
+	password = "[PASSWORD]"
 	try:
 		server = smtplib.SMTP("smtp.gmail.com:587")
 		#server.ehlo()
