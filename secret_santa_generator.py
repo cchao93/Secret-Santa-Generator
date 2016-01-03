@@ -42,7 +42,6 @@ def pairParticipants(participant_list):
 			break
 		else:
 			participant_pairs[giver] = receiver
-	print participant_pairs
 	return participant_pairs
 
 def sendMailsToParticipants(organizer, price_limit, participant_pairs):
