@@ -1,3 +1,5 @@
+# script that assigns each Secret Santa participant a gift recipient
+
 import copy
 from collections import defaultdict
 import random
