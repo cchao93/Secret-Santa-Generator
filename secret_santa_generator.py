@@ -107,7 +107,7 @@ def sendMailsToParticipants(organizer, price_limit, participant_pairs):
 	server.quit()
 
 """
-sends out notification email to a gift giver about their
+send out notification email to a gift giver about their
 corresponding receiver
 
 :type server: SMTP
